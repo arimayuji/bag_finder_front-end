@@ -1,5 +1,3 @@
-
-
 import 'package:bag_finder_frontend/app/shared/themes/app_colors.dart';
 import 'package:bag_finder_frontend/app/shared/themes/app_dimensions.dart';
 import 'package:bag_finder_frontend/app/shared/themes/app_text_styles.dart';
@@ -7,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 class AppThemes {
   static final lightTheme = ThemeData(
-    scaffoldBackgroundColor: AppColors.white,
+    scaffoldBackgroundColor: AppColors.secondary,
     splashColor: Colors.transparent,
-    shadowColor: AppColors.primaryGreen,
+    shadowColor: AppColors.primary,
     fontFamily: GoogleFonts.poppins().fontFamily,
-    dividerColor: AppColors.primaryGreen,
+    dividerColor: AppColors.primary,
     dividerTheme: DividerThemeData(
-      color: AppColors.primaryGreen,
+      color: AppColors.primary,
       thickness: AppDimensions.borderMedium,
       indent: 5,
       endIndent: 5,
@@ -33,7 +31,7 @@ class AppThemes {
       fillColor:
           WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
         if (states.contains(WidgetState.selected)) {
-          return AppColors.primaryGreen;
+          return AppColors.primary;
         }
         return Colors.grey;
       }),
@@ -45,8 +43,8 @@ class AppThemes {
           ),
         ),
         alignment: AlignmentDirectional.center,
-        backgroundColor: AppColors.white,
-        surfaceTintColor: AppColors.white),
+        backgroundColor: AppColors.secondary,
+        surfaceTintColor: AppColors.secondary),
     textTheme: TextTheme(
       displayLarge: AppTextStyles.display,
       headlineLarge: AppTextStyles.headline,
@@ -56,19 +54,19 @@ class AppThemes {
     ),
     cardTheme: CardTheme(
       shape: RoundedRectangleBorder(
-        side: BorderSide(color: AppColors.primaryGreen, width: 1.2),
+        side: BorderSide(color: AppColors.primary, width: 1.2),
         borderRadius: BorderRadius.circular(
           AppDimensions.radiusSmall,
         ),
       ),
-      color: AppColors.white,
+      color: AppColors.secondary,
       elevation: 8,
-      shadowColor: AppColors.primaryGreen,
-      surfaceTintColor: AppColors.white,
+      shadowColor: AppColors.primary,
+      surfaceTintColor: AppColors.secondary,
     ),
     inputDecorationTheme: InputDecorationTheme(
       labelStyle: AppTextStyles.titleMedium,
-      hintStyle: AppTextStyles.titleMedium.copyWith(color: AppColors.gray),
+      hintStyle: AppTextStyles.titleMedium.copyWith(color: AppColors.secondaryGrey),
       contentPadding: const EdgeInsets.only(
         left: AppDimensions.paddingMedium,
         right: AppDimensions.paddingMedium,
@@ -78,7 +76,7 @@ class AppThemes {
         borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
         gapPadding: AppDimensions.paddingSmall,
         borderSide: BorderSide(
-            color: AppColors.primaryGreen,
+            color: AppColors.primary,
             width: AppDimensions.borderThin * 1.5,
             style: BorderStyle.solid),
       ),
@@ -86,7 +84,7 @@ class AppThemes {
         borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
         gapPadding: AppDimensions.paddingSmall,
         borderSide: BorderSide(
-            color: AppColors.primaryGreen,
+            color: AppColors.primary,
             width: AppDimensions.borderThin * 1.5,
             style: BorderStyle.solid),
       ),
@@ -95,72 +93,41 @@ class AppThemes {
         borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
         gapPadding: AppDimensions.paddingSmall,
         borderSide: BorderSide(
-            color: AppColors.primaryGreen,
+            color: AppColors.primary,
             width: AppDimensions.borderThin * 1.5,
             style: BorderStyle.solid),
       ),
     ),
     iconTheme: IconThemeData(
-      color: AppColors.primaryGreen,
+      color: AppColors.primary,
       size: AppDimensions.iconLarge,
     ),
     iconButtonTheme: IconButtonThemeData(
       style: ButtonStyle(
         iconColor: WidgetStateProperty.all(
-          AppColors.primaryGreen,
+          AppColors.primary,
         ),
       ),
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: AppColors.primaryGreen,
+      backgroundColor: AppColors.primary,
     ),
     bottomAppBarTheme: BottomAppBarTheme(
-      color: AppColors.white,
-      surfaceTintColor: AppColors.white,
+      color: AppColors.secondary,
+      surfaceTintColor: AppColors.secondary,
     ),
     colorScheme: ColorScheme(
       brightness: Brightness.light,
-      primary: AppColors.primaryGreen,
-      onPrimary: AppColors.primaryGreen,
-      secondary: AppColors.white,
-      onSecondary: AppColors.white,
-      error: AppColors.red,
-      shadow: AppColors.primaryGreen,
-      onError: AppColors.red,
-      surface: AppColors.white,
-      onSurface: AppColors.white,
+      primary: AppColors.primary,
+      onPrimary: AppColors.primary,
+      secondary: AppColors.secondary,
+      onSecondary: AppColors.secondary,
+      error: AppColors.error,
+      shadow: AppColors.primary,
+      onError: AppColors.error,
+      surface: AppColors.secondary,
+      onSurface: AppColors.secondary,
     ),
   );
-
-  static final darkTheme = ThemeData(
-      iconTheme: IconThemeData(color: AppColors.primaryGreen),
-      shadowColor: AppColors.primaryGreen,
-      scaffoldBackgroundColor: AppColors.primaryGreen,
-      cardTheme: CardTheme(
-        color: AppColors.primaryGreen,
-        elevation: 4,
-        shadowColor: AppColors.white,
-        shape: RoundedRectangleBorder(
-          side: BorderSide(color: AppColors.white, style: BorderStyle.solid),
-        ),
-      ),
-      iconButtonTheme: IconButtonThemeData(
-          style: ButtonStyle(
-              iconColor: WidgetStateProperty.all(AppColors.primaryGreen))),
-      floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: AppColors.white,
-      ),
-      bottomAppBarTheme: BottomAppBarTheme(color: AppColors.primaryGreen),
-      colorScheme: ColorScheme(
-        brightness: Brightness.dark,
-        primary: AppColors.primaryGreen,
-        onPrimary: AppColors.primaryGreen,
-        secondary: AppColors.white,
-        onSecondary: AppColors.white,
-        error: AppColors.red,
-        shadow: AppColors.primaryGreen,
-        onError: AppColors.red,
-        surface: AppColors.white,
-        onSurface: AppColors.white,
-      ));
+  
 }

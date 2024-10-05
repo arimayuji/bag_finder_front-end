@@ -2,6 +2,9 @@ import 'package:bag_finder_frontend/app/shared/themes/app_dimensions.dart';
 import 'package:flutter/material.dart';
 
 class AppIcons {
+  static Icon get homeIcon =>
+      const Icon(Icons.home, size: AppDimensions.iconMedium);
+
   static Icon get emailIcon =>
       const Icon(Icons.email, size: AppDimensions.iconMedium);
 
