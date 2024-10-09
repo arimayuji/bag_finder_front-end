@@ -5,6 +5,9 @@ class AppIcons {
   static Icon get homeIcon =>
       const Icon(Icons.home, size: AppDimensions.iconMedium);
 
+  static Icon get messageIcon =>
+      const Icon(Icons.message, size: AppDimensions.iconMedium);
+      
   static Icon get emailIcon =>
       const Icon(Icons.email, size: AppDimensions.iconMedium);
 

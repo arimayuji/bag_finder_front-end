@@ -3,12 +3,13 @@ import 'package:bag_finder_frontend/app/shared/themes/app_dimensions.dart';
 import 'package:bag_finder_frontend/app/shared/themes/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 class AppThemes {
   static final lightTheme = ThemeData(
     scaffoldBackgroundColor: AppColors.secondary,
     splashColor: Colors.transparent,
     shadowColor: AppColors.primary,
-    fontFamily: GoogleFonts.poppins().fontFamily,
+    fontFamily: GoogleFonts.sora().fontFamily,
     dividerColor: AppColors.primary,
     dividerTheme: DividerThemeData(
       color: AppColors.primary,
@@ -16,14 +17,26 @@ class AppThemes {
       indent: 5,
       endIndent: 5,
     ),
-    elevatedButtonTheme: const ElevatedButtonThemeData(
+    elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
-      elevation: WidgetStatePropertyAll(8),
-      shape: WidgetStatePropertyAll(StadiumBorder()),
-      padding: WidgetStatePropertyAll(
+      backgroundColor: WidgetStatePropertyAll(AppColors.primary),
+      textStyle: WidgetStatePropertyAll(
+        AppTextStyles.button.copyWith(
+          fontSize: 16,
+        ),
+      ),
+      elevation: const WidgetStatePropertyAll(8),
+      shape: WidgetStatePropertyAll(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            AppDimensions.radiusSmall,
+          ),
+        ),
+      ),
+      padding: const WidgetStatePropertyAll(
         EdgeInsets.symmetric(
-          vertical: AppDimensions.paddingLarge,
-          horizontal: AppDimensions.paddingExtraLarge,
+          vertical: AppDimensions.paddingLarge * 0.8,
+          horizontal: AppDimensions.paddingExtraLarge * 0.8,
         ),
       ),
     )),
@@ -65,15 +78,18 @@ class AppThemes {
       surfaceTintColor: AppColors.secondary,
     ),
     inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: AppColors.textFieldBackground,
       labelStyle: AppTextStyles.titleMedium,
-      hintStyle: AppTextStyles.titleMedium.copyWith(color: AppColors.secondaryGrey),
+      hintStyle:
+          AppTextStyles.titleMedium.copyWith(color: AppColors.secondaryGrey,),
       contentPadding: const EdgeInsets.only(
         left: AppDimensions.paddingMedium,
         right: AppDimensions.paddingMedium,
         top: AppDimensions.paddingExtraLarge,
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
+        borderRadius: BorderRadius.circular(AppDimensions.radiusMedium,),
         gapPadding: AppDimensions.paddingSmall,
         borderSide: BorderSide(
             color: AppColors.primary,
@@ -81,7 +97,7 @@ class AppThemes {
             style: BorderStyle.solid),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
+        borderRadius: BorderRadius.circular(AppDimensions.radiusMedium,),
         gapPadding: AppDimensions.paddingSmall,
         borderSide: BorderSide(
             color: AppColors.primary,
@@ -90,7 +106,7 @@ class AppThemes {
       ),
       floatingLabelStyle: AppTextStyles.headline,
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
+        borderRadius: BorderRadius.circular(AppDimensions.radiusMedium,),
         gapPadding: AppDimensions.paddingSmall,
         borderSide: BorderSide(
             color: AppColors.primary,
@@ -129,5 +145,4 @@ class AppThemes {
       onSurface: AppColors.secondary,
     ),
   );
-  
 }

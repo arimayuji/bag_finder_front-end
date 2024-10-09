@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class AppTextStyles {
   static TextStyle display = TextStyle(
     color: AppColors.primary,
-    fontSize: 24,
+    fontSize: 32,
     fontWeight: FontWeight.bold,
   );
 
@@ -27,5 +27,15 @@ class AppTextStyles {
   static TextStyle bodyText2 = TextStyle(
     color: AppColors.primary,
     fontSize: 8.0,
+  );
+
+  static TextStyle button = TextStyle(
+    color: AppColors.secondary,
+    fontSize: 20.0,
+  );
+
+  static TextStyle placeholder = TextStyle(
+    color: AppColors.secondary,
+    fontSize: 12.0,
   );
 }
