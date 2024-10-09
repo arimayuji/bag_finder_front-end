@@ -4,6 +4,7 @@ import 'package:bag_finder_frontend/app/shared/themes/functions/global_snackbar.
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({super.key});
@@ -17,9 +18,11 @@ class AppWidget extends StatelessWidget {
       ),
     );
     return MaterialApp.router(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       scaffoldMessengerKey: rootScaffoldMessengerKey,
       debugShowCheckedModeBanner: false,
-      title: 'Formulários',
+      title: 'Bag Finder',
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,
       theme: AppThemes.lightTheme,
