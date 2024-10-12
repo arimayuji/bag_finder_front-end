@@ -13,9 +13,11 @@
     "loginPageTitle2SecondLine" : "Realize seu cadastro!",
     "loginPageTitle3" : "Precisa de ajuda?",
     "loginPageTitle4": "Esqueceu a sua senha?",
+    "loginPageTitle5": "Encontre a sua conta",
     "loginPageDoesntHaveAccount" : "Não possui conta?",
     "loginPageForgotPassword" : "Encontre sua conta",
     "loginPageRememberMe" : "Lembrar-me",
+    "comeBackToHomepage": "Voltar para a Página Inicial",
 
     "loginPageButtonLogin" : "Realizar login",
     "signUpPageButtonSignUp" : "Cadastre-se",
@@ -25,12 +27,16 @@
 
     "emailPlaceholder": "E-mail",
     "sendEmailForConfimationPlaceholder": "Informe seu e-mail para confirmação",
+    "sendEmailPlaceholder": "Enviar E-mail",
     "passwordPlaceholder": "Senha",
     "fullNamePlaceholder": "Nome completo",
     "emailForContactPlaceholder": "E-mail para contato",
     "contactUsYourProblemPlaceholder": "Conte-nos o seu problema",
 
     "loginPageAlreadyHaveAccount": "Ja possui uma conta?",
-    "loginPageClickHere": "Clique aqui"
+    "loginPageClickHere": "Clique aqui",
+
+    "helloUserHomepage": "Olá!,",
+    "greetingsFromBagFinder": "BagFinder te deseja uma ótima viagem!"
  }
     
