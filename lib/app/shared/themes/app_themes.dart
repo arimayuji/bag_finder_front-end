@@ -17,6 +17,19 @@ class AppThemes {
       indent: 5,
       endIndent: 5,
     ),
+    checkboxTheme: CheckboxThemeData(
+      checkColor: WidgetStatePropertyAll(AppColors.secondary),
+      side: BorderSide(
+        color: AppColors.primary,
+      ),
+      shape: RoundedRectangleBorder(
+        side: BorderSide(
+          style: BorderStyle.solid,
+          width: 1.5,
+          color: AppColors.primary,
+        ),
+      ),
+    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
       backgroundColor: WidgetStatePropertyAll(AppColors.primary),
@@ -35,8 +48,8 @@ class AppThemes {
       ),
       padding: const WidgetStatePropertyAll(
         EdgeInsets.symmetric(
-          vertical: AppDimensions.paddingLarge * 0.8,
-          horizontal: AppDimensions.paddingExtraLarge * 0.8,
+          vertical: AppDimensions.paddingLarge ,
+          horizontal: AppDimensions.paddingExtraLarge ,
         ),
       ),
     )),
@@ -81,15 +94,18 @@ class AppThemes {
       filled: true,
       fillColor: AppColors.textFieldBackground,
       labelStyle: AppTextStyles.titleMedium,
-      hintStyle:
-          AppTextStyles.titleMedium.copyWith(color: AppColors.secondaryGrey,),
+      hintStyle: AppTextStyles.titleMedium.copyWith(
+        color: AppColors.secondaryGrey,
+      ),
       contentPadding: const EdgeInsets.only(
         left: AppDimensions.paddingMedium,
         right: AppDimensions.paddingMedium,
         top: AppDimensions.paddingExtraLarge,
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppDimensions.radiusMedium,),
+        borderRadius: BorderRadius.circular(
+          AppDimensions.radiusMedium,
+        ),
         gapPadding: AppDimensions.paddingSmall,
         borderSide: BorderSide(
             color: AppColors.primary,
@@ -97,7 +113,9 @@ class AppThemes {
             style: BorderStyle.solid),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppDimensions.radiusMedium,),
+        borderRadius: BorderRadius.circular(
+          AppDimensions.radiusMedium,
+        ),
         gapPadding: AppDimensions.paddingSmall,
         borderSide: BorderSide(
             color: AppColors.primary,
@@ -106,7 +124,9 @@ class AppThemes {
       ),
       floatingLabelStyle: AppTextStyles.headline,
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppDimensions.radiusMedium,),
+        borderRadius: BorderRadius.circular(
+          AppDimensions.radiusMedium,
+        ),
         gapPadding: AppDimensions.paddingSmall,
         borderSide: BorderSide(
             color: AppColors.primary,

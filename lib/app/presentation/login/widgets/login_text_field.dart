@@ -5,14 +5,23 @@ import 'package:flutter/material.dart';
 class LoginTextField extends StatelessWidget {
   final Icon prefixIcon;
   final String hint;
-  const LoginTextField(
-      {super.key, required this.prefixIcon, required this.hint});
+  final void Function(String)? onChanged;
+  const LoginTextField({
+    super.key,
+    required this.prefixIcon,
+    required this.hint,
+    this.onChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-      textAlign: TextAlign.center,
+      onChanged: onChanged,
       decoration: InputDecoration(
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: AppDimensions.paddingSmall,
+          vertical: AppDimensions.paddingLarge,
+        ),
         fillColor: AppColors.textFieldBackground,
         filled: true,
         border: const OutlineInputBorder(),
