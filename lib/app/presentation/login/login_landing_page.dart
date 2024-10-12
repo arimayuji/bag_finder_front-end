@@ -14,17 +14,24 @@ class LoginLandingPage extends StatefulWidget {
 class _LoginLandingPageState extends State<LoginLandingPage> {
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    return SafeArea(
       left: false,
       right: false,
       bottom: false,
-      child: Padding(
-        padding: EdgeInsets.only(
-          right: AppDimensions.paddingMedium,
-          left:  AppDimensions.paddingMedium,
-          bottom: AppDimensions.paddingMedium,
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(
+            right: AppDimensions.paddingMedium,
+            left: AppDimensions.paddingMedium,
+            bottom: AppDimensions.paddingMedium,
+          ),
+          child: SizedBox(
+            height: screenHeight, // Ajusta o tamanho para evitar overflow
+            child: const RouterOutlet(),
+          ),
         ),
-        child: RouterOutlet(),
       ),
     );
   }

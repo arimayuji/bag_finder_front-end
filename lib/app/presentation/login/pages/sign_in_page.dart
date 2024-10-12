@@ -1,3 +1,4 @@
+import 'package:bag_finder_frontend/app/presentation/login/controller/sign_in_controller.dart';
 import 'package:bag_finder_frontend/app/presentation/login/widgets/login_text_field.dart';
 import 'package:bag_finder_frontend/app/shared/themes/app_colors.dart';
 import 'package:bag_finder_frontend/app/shared/themes/app_dimensions.dart';
@@ -15,6 +16,8 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
+  SignInController filterController = Modular.get<SignInController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,14 +44,20 @@ class _SignInPageState extends State<SignInPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               LoginTextField(
-                prefixIcon: AppIcons.emailIcon,
+                onChanged: (String value) {
+                  filterController.setEmail(value);
+                },
+                prefixIcon: AppIconsSecondaryGrey.emailIcon,
                 hint: AppLocalizations.of(context)!.emailPlaceholder,
               ),
               const SizedBox(
                 height: AppDimensions.verticalSpaceLarge,
               ),
               LoginTextField(
-                prefixIcon: AppIcons.passwordIcon,
+                onChanged: (String value) {
+                  filterController.setPassword(value);
+                },
+                prefixIcon: AppIconsSecondaryGrey.passwordIcon,
                 hint: AppLocalizations.of(context)!.passwordPlaceholder,
               ),
             ],
@@ -57,15 +66,27 @@ class _SignInPageState extends State<SignInPage> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                AppLocalizations.of(context)!.loginPageRememberMe,
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      color: AppColors.secondaryGrey,
-                    ),
+              Row(
+                children: [
+                  Checkbox(
+                    value: filterController.rememberMe,
+                    onChanged: (value) {
+                      setState(() {
+                        filterController.setRememberMe(value);
+                      });
+                    },
+                  ),
+                  Text(
+                    AppLocalizations.of(context)!.loginPageRememberMe,
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          color: AppColors.secondaryGrey,
+                        ),
+                  ),
+                ],
               ),
               TextButton(
                 onPressed: () {
-                  Modular.to.navigate('/login/forgot-password');
+                  Modular.to.navigate('/login/find-your-account');
                 },
                 child: Text(
                   AppLocalizations.of(context)!.loginPageForgotPassword,
@@ -82,7 +103,9 @@ class _SignInPageState extends State<SignInPage> {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Modular.to.navigate('/user/home');
+              },
               child: Text(
                 AppLocalizations.of(context)!.loginPageButtonLogin,
                 style: AppTextStyles.button,
@@ -111,7 +134,7 @@ class _SignInPageState extends State<SignInPage> {
                       Modular.to.navigate('/login/sign-up');
                     },
                     child: Text(
-                      AppLocalizations.of(context)!.loginPageButtonLogin,
+                      AppLocalizations.of(context)!.signUpPageButtonSignUp,
                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                             fontWeight: FontWeight.bold,
                             decoration: TextDecoration.underline,

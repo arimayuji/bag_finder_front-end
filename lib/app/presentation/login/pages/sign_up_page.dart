@@ -18,19 +18,6 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: AppColors.primary,
-            size: AppDimensions.iconLarge,
-          ),
-          onPressed: () {
-            Modular.to.navigate('/login/sign-in');
-          },
-        ),
-        backgroundColor: Colors.transparent,
-      ),
       body: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.max,
@@ -57,21 +44,21 @@ class _SignUpPageState extends State<SignUpPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 LoginTextField(
-                  prefixIcon: AppIcons.personIcon,
+                  prefixIcon: AppIconsSecondaryGrey.personIcon,
                   hint: AppLocalizations.of(context)!.fullNamePlaceholder,
                 ),
                 const SizedBox(
                   height: AppDimensions.verticalSpaceLarge,
                 ),
                 LoginTextField(
-                  prefixIcon: AppIcons.emailIcon,
+                  prefixIcon: AppIconsSecondaryGrey .emailIcon,
                   hint: AppLocalizations.of(context)!.emailPlaceholder,
                 ),
                 const SizedBox(
                   height: AppDimensions.verticalSpaceLarge,
                 ),
                 LoginTextField(
-                  prefixIcon: AppIcons.passwordIcon,
+                  prefixIcon: AppIconsSecondaryGrey.passwordIcon,
                   hint: AppLocalizations.of(context)!.passwordPlaceholder,
                 ),
               ],
