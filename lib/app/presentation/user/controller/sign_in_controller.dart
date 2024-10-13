@@ -23,4 +23,8 @@ class SignInController {
     password = null;
     rememberMe = false;
   }
+
+  bool areFieldsValid() {
+    return email != null && password != null;
+  }
 }

@@ -1,10 +1,11 @@
-import 'package:bag_finder_frontend/app/presentation/login/widgets/login_text_field.dart';
+import 'package:bag_finder_frontend/app/presentation/user/widgets/login_text_field.dart';
 import 'package:bag_finder_frontend/app/shared/themes/app_colors.dart';
 import 'package:bag_finder_frontend/app/shared/themes/app_icons.dart';
 import 'package:bag_finder_frontend/app/shared/themes/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
 
@@ -40,6 +41,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             LoginTextField(
               prefixIcon: AppIconsSecondaryGrey.emailIcon,
               hint: "E-mail",
+              isPassword: false,
+              fieldType: 'email',
+              isRequired: true,
             ),
             SizedBox(
               width: double.infinity,

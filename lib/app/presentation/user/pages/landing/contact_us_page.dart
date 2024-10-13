@@ -1,15 +1,20 @@
-import 'package:bag_finder_frontend/app/presentation/login/widgets/login_text_field.dart';
+import 'package:bag_finder_frontend/app/presentation/user/widgets/login_text_field.dart';
 import 'package:bag_finder_frontend/app/shared/themes/app_colors.dart';
 import 'package:bag_finder_frontend/app/shared/themes/app_dimensions.dart';
 import 'package:bag_finder_frontend/app/shared/themes/app_icons.dart';
 import 'package:bag_finder_frontend/app/shared/themes/app_text_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
-class FindYourAccountPage extends StatelessWidget {
-  const FindYourAccountPage({super.key});
+class ContactUsPage extends StatefulWidget {
+  const ContactUsPage({super.key});
 
+  @override
+  State<ContactUsPage> createState() => _ContactUsPageState();
+}
+
+class _ContactUsPageState extends State<ContactUsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +30,7 @@ class FindYourAccountPage extends StatelessWidget {
               ),
             ),
             Text(
-              AppLocalizations.of(context)!.loginPageTitle5,
+              AppLocalizations.of(context)!.loginPageTitle3,
               style: Theme.of(context).textTheme.displayLarge!.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -38,9 +43,20 @@ class FindYourAccountPage extends StatelessWidget {
                   prefixIcon: AppIconsSecondaryGrey.emailIcon,
                   hint:
                       AppLocalizations.of(context)!.emailForContactPlaceholder,
+                  isPassword: false,
+                  fieldType: 'email',
+                  isRequired: true,
                 ),
                 const SizedBox(
                   height: AppDimensions.verticalSpaceLarge,
+                ),
+                LoginTextField(
+                  prefixIcon: AppIconsSecondaryGrey.messageIcon,
+                  hint: AppLocalizations.of(context)!
+                      .contactUsYourProblemPlaceholder,
+                  isPassword: false,
+                  fieldType: 'email',
+                  isRequired: false,
                 ),
               ],
             ),

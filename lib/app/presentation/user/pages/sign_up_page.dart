@@ -1,4 +1,4 @@
-import 'package:bag_finder_frontend/app/presentation/login/widgets/login_text_field.dart';
+import 'package:bag_finder_frontend/app/presentation/user/widgets/login_text_field.dart';
 import 'package:bag_finder_frontend/app/shared/themes/app_colors.dart';
 import 'package:bag_finder_frontend/app/shared/themes/app_dimensions.dart';
 import 'package:bag_finder_frontend/app/shared/themes/app_icons.dart';
@@ -46,13 +46,19 @@ class _SignUpPageState extends State<SignUpPage> {
                 LoginTextField(
                   prefixIcon: AppIconsSecondaryGrey.personIcon,
                   hint: AppLocalizations.of(context)!.fullNamePlaceholder,
+                  isPassword: false,
+                  fieldType: 'name',
+                  isRequired: true,
                 ),
                 const SizedBox(
                   height: AppDimensions.verticalSpaceLarge,
                 ),
                 LoginTextField(
-                  prefixIcon: AppIconsSecondaryGrey .emailIcon,
+                  prefixIcon: AppIconsSecondaryGrey.emailIcon,
                   hint: AppLocalizations.of(context)!.emailPlaceholder,
+                  isPassword: false,
+                  fieldType: 'email',
+                  isRequired: true,
                 ),
                 const SizedBox(
                   height: AppDimensions.verticalSpaceLarge,
@@ -60,6 +66,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 LoginTextField(
                   prefixIcon: AppIconsSecondaryGrey.passwordIcon,
                   hint: AppLocalizations.of(context)!.passwordPlaceholder,
+                  isPassword: true,
+                  fieldType: 'name',
+                  isRequired: true,
                 ),
               ],
             ),

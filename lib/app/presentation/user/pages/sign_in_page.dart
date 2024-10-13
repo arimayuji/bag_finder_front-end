@@ -1,9 +1,11 @@
-import 'package:bag_finder_frontend/app/presentation/login/controller/sign_in_controller.dart';
-import 'package:bag_finder_frontend/app/presentation/login/widgets/login_text_field.dart';
+import 'package:bag_finder_frontend/app/presentation/user/controller/sign_in_controller.dart';
+import 'package:bag_finder_frontend/app/presentation/user/widgets/login_text_field.dart';
 import 'package:bag_finder_frontend/app/shared/themes/app_colors.dart';
 import 'package:bag_finder_frontend/app/shared/themes/app_dimensions.dart';
 import 'package:bag_finder_frontend/app/shared/themes/app_icons.dart';
 import 'package:bag_finder_frontend/app/shared/themes/app_text_styles.dart';
+import 'package:bag_finder_frontend/app/stores/user_provider.dart';
+import 'package:bag_finder_frontend/domain/entity/user_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -17,6 +19,16 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   SignInController filterController = Modular.get<SignInController>();
+  UserProvider provider = Modular.get<UserProvider>();
+
+  bool isLoginButtonEnabled() {
+    if (filterController.email == null || filterController.password == null) {
+      return false;
+    }
+
+    return filterController.email!.isNotEmpty &&
+        filterController.password!.isNotEmpty;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,9 +58,13 @@ class _SignInPageState extends State<SignInPage> {
               LoginTextField(
                 onChanged: (String value) {
                   filterController.setEmail(value);
+                  setState(() {});
                 },
                 prefixIcon: AppIconsSecondaryGrey.emailIcon,
                 hint: AppLocalizations.of(context)!.emailPlaceholder,
+                isPassword: false,
+                fieldType: 'email',
+                isRequired: true,
               ),
               const SizedBox(
                 height: AppDimensions.verticalSpaceLarge,
@@ -56,9 +72,13 @@ class _SignInPageState extends State<SignInPage> {
               LoginTextField(
                 onChanged: (String value) {
                   filterController.setPassword(value);
+                  setState(() {});
                 },
                 prefixIcon: AppIconsSecondaryGrey.passwordIcon,
                 hint: AppLocalizations.of(context)!.passwordPlaceholder,
+                isPassword: true,
+                fieldType: 'password',
+                isRequired: true,
               ),
             ],
           ),
@@ -103,9 +123,19 @@ class _SignInPageState extends State<SignInPage> {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () {
-                Modular.to.navigate('/user/home');
-              },
+              onPressed: isLoginButtonEnabled()
+                  ? () async {
+                      // Modular.to.navigate('/user/home');
+                      if (filterController.areFieldsValid()) {
+                        UserEntity? user = await provider.loginUser(
+                          email: filterController.email!,
+                          password: filterController.password!,
+                        );
+
+                        user != null ? Modular.to.navigate('/user/home') : null;
+                      }
+                    }
+                  : null,
               child: Text(
                 AppLocalizations.of(context)!.loginPageButtonLogin,
                 style: AppTextStyles.button,
