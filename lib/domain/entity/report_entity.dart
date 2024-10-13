@@ -7,9 +7,10 @@ class ReportEntity {
   final UserEntity userId;
   final BagEntity bagEntity;
 
-  ReportEntity(
-      {required this.id,
-      required this.description,
-      required this.userId,
-      required this.bagEntity});
+  ReportEntity({
+    required this.id,
+    required this.description,
+    required this.userId,
+    required this.bagEntity,
+  });
 }
