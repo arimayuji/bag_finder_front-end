@@ -10,7 +10,7 @@ class EnvironmentConfig {
   // ignore: constant_identifier_names
   static const ENV = String.fromEnvironment('ENV');
 
-  static IBagRepository getFormRepository() {
+  static IBagRepository getBagRepository() {
     EnvironmentEnum value = EnvironmentEnum.values.firstWhere(
       (element) {
         return element.name.toUpperCase() == ENV.toUpperCase();
@@ -23,6 +23,7 @@ class EnvironmentConfig {
       return BagRepositoryMock();
     }
   }
+
 
   static IUserRepository getUserRepository() {
     EnvironmentEnum value = EnvironmentEnum.values.firstWhere(
@@ -37,4 +38,5 @@ class EnvironmentConfig {
       return UserRepositoryMock();
     }
   }
+ 
 }

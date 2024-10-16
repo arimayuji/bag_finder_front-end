@@ -3,16 +3,17 @@ import 'package:bag_finder_frontend/app/presentation/landing/controller/landing_
 import 'package:bag_finder_frontend/app/presentation/home/landing_page.dart';
 import 'package:bag_finder_frontend/app/presentation/landing/splash_page.dart';
 import 'package:bag_finder_frontend/app/presentation/landing/welcome_landing_page.dart';
-import 'package:bag_finder_frontend/app/presentation/login/controller/sign_in_controller.dart';
-import 'package:bag_finder_frontend/app/presentation/login/login_landing_page.dart';
-import 'package:bag_finder_frontend/app/presentation/login/pages/landing/contact_us_page.dart';
-import 'package:bag_finder_frontend/app/presentation/login/pages/landing/find_your_account_page.dart';
-import 'package:bag_finder_frontend/app/presentation/login/pages/landing/forgot_password_page.dart';
-import 'package:bag_finder_frontend/app/presentation/login/pages/sign_in_page.dart';
-import 'package:bag_finder_frontend/app/presentation/login/pages/sign_up_page.dart';
+import 'package:bag_finder_frontend/app/presentation/user/controller/sign_in_controller.dart';
+import 'package:bag_finder_frontend/app/presentation/user/login_landing_page.dart';
+import 'package:bag_finder_frontend/app/presentation/user/pages/landing/contact_us_page.dart';
+import 'package:bag_finder_frontend/app/presentation/user/pages/landing/find_your_account_page.dart';
+import 'package:bag_finder_frontend/app/presentation/user/pages/landing/forgot_password_page.dart';
+import 'package:bag_finder_frontend/app/presentation/user/pages/sign_in_page.dart';
+import 'package:bag_finder_frontend/app/presentation/user/pages/sign_up_page.dart';
 import 'package:bag_finder_frontend/app/shared/helpers/environments/environment_config.dart';
 import 'package:bag_finder_frontend/app/stores/user_provider.dart';
 import 'package:bag_finder_frontend/domain/repositories/user_repository.dart';
+import 'package:bag_finder_frontend/domain/usecases/login_user_usecase.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class AppModule extends Module {
@@ -59,6 +60,7 @@ class UserModule extends Module {
       () => EnvironmentConfig.getUserRepository(),
       config: BindConfig(),
     );
+    i.addSingleton<ILoginUserUsecase>(LoginUserUsecase.new);
   }
 
   @override
