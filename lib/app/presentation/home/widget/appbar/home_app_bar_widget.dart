@@ -5,7 +5,8 @@ import 'package:bag_finder_frontend/app/shared/themes/app_dimensions.dart';
 import 'package:flutter/material.dart';
 
 class HomeAppBarWidget extends StatelessWidget {
-  const HomeAppBarWidget({super.key});
+  final String userName;
+  const HomeAppBarWidget({super.key, required this.userName});
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +19,11 @@ class HomeAppBarWidget extends StatelessWidget {
         right: AppDimensions.paddingSmall,
         bottom: AppDimensions.paddingSmall,
       ),
-      child: const Column(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          HomeWelcomeUserWidget(userName: 'Luisa'),
+          HomeWelcomeUserWidget(userName: userName),
           SizedBox(
             height: AppDimensions.verticalSpaceMedium,
           ),

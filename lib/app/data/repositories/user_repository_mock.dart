@@ -8,7 +8,7 @@ class UserRepositoryMock implements IUserRepository {
     isAdmin: true,
     id: '1',
     email: 'bagfinder@gmail.com',
-    password: 'password',
+    password: 'password!',
     name: 'Admin',
     photoUrl: '',
   );
