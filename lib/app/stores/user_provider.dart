@@ -23,4 +23,11 @@ class UserProvider extends ChangeNotifier {
     user = null;
     Modular.to.navigate('/login/sign-in');
   }
+
+  // Aqui não é necessário setar ID e nome do usuário, pois são final
+  // Apenas armazene o usuário na propriedade `user` durante o login
+  UserEntity? get currentUser => user;
+
+  String? get userName => user?.name; // Obter nome do usuário
+  String? get userId => user?.id; // Obter ID do usuário
 }

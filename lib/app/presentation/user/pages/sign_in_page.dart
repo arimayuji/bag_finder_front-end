@@ -9,6 +9,8 @@ import 'package:bag_finder_frontend/domain/entity/user_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -18,16 +20,65 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  SignInController filterController = Modular.get<SignInController>();
-  UserProvider provider = Modular.get<UserProvider>();
+  final SignInController filterController = Modular.get<SignInController>();
+  final UserProvider provider = Modular.get<UserProvider>();
 
   bool isLoginButtonEnabled() {
-    if (filterController.email == null || filterController.password == null) {
-      return false;
-    }
-
-    return filterController.email!.isNotEmpty &&
+    return filterController.email != null &&
+        filterController.password != null &&
+        filterController.email!.isNotEmpty &&
         filterController.password!.isNotEmpty;
+  }
+
+  Future<Map<String, dynamic>> login(BuildContext context) async {
+    final response = await http.post(
+      Uri.parse('http://localhost:5000/login'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        'email': filterController.email,
+        'password': filterController.password,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      return {
+        'userId': data['userId'],
+        'userName': data['userName'],
+      };
+    } else if (response.statusCode == 401) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Usuário ou senha inválidos.')),
+      );
+      return {'userId': -1, 'userName': null};
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro ao fazer login.')),
+      );
+      return {'userId': -1, 'userName': null};
+    }
+  }
+
+  Future<void> fetchBags(int userId) async {
+    final response = await http.get(
+      Uri.parse('http://localhost:5000/bags?userId=$userId'),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      if (data.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Nenhuma mala encontrada.')),
+        );
+        return;
+      }
+      print(data);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro ao buscar malas.')),
+      );
+    }
   }
 
   @override
@@ -49,14 +100,12 @@ class _SignInPageState extends State<SignInPage> {
                   fontWeight: FontWeight.w700,
                 ),
           ),
-          const SizedBox(
-            height: AppDimensions.verticalSpaceMedium,
-          ),
+          const SizedBox(height: AppDimensions.verticalSpaceMedium),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               LoginTextField(
-                onChanged: (String value) {
+                onChanged: (value) {
                   filterController.setEmail(value);
                   setState(() {});
                 },
@@ -66,11 +115,9 @@ class _SignInPageState extends State<SignInPage> {
                 fieldType: 'email',
                 isRequired: true,
               ),
-              const SizedBox(
-                height: AppDimensions.verticalSpaceLarge,
-              ),
+              const SizedBox(height: AppDimensions.verticalSpaceLarge),
               LoginTextField(
-                onChanged: (String value) {
+                onChanged: (value) {
                   filterController.setPassword(value);
                   setState(() {});
                 },
@@ -125,14 +172,24 @@ class _SignInPageState extends State<SignInPage> {
             child: ElevatedButton(
               onPressed: isLoginButtonEnabled()
                   ? () async {
-                      // Modular.to.navigate('/user/home');
                       if (filterController.areFieldsValid()) {
-                        UserEntity? user = await provider.loginUser(
-                          email: filterController.email!,
-                          password: filterController.password!,
-                        );
+                        Map<String, dynamic> loginResponse = await login(context);
+                        int userId = loginResponse['userId'];
+                        String? userName = loginResponse['userName'];
 
-                        user != null ? Modular.to.navigate('/user/home') : null;
+                        if (userId != -1) {
+                          provider.user = UserEntity(
+                            id: userId.toString(),
+                            email: filterController.email!,
+                            password: filterController.password!,
+                            name: userName ?? '',
+                            phone: '',
+                            photoUrl: null,
+                            isAdmin: false,
+                          );
+
+                          Modular.to.navigate('/user/home');
+                        }
                       }
                     }
                   : null,
@@ -142,13 +199,10 @@ class _SignInPageState extends State<SignInPage> {
               ),
             ),
           ),
-          const SizedBox(
-            height: 5,
-          ),
+          const SizedBox(height: 5),
           Column(
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -172,7 +226,7 @@ class _SignInPageState extends State<SignInPage> {
                             decorationThickness: 2,
                           ),
                     ),
-                  )
+                  ),
                 ],
               ),
               Row(
@@ -197,11 +251,11 @@ class _SignInPageState extends State<SignInPage> {
                             decorationThickness: 2,
                           ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ],
-          )
+          ),
         ],
       ),
     );
