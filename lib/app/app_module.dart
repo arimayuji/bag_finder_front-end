@@ -19,6 +19,11 @@ import 'package:flutter_modular/flutter_modular.dart';
 class AppModule extends Module {
   @override
   void binds(i) {
+    i.addSingleton<ILoginUserUsecase>(LoginUserUsecase.new);
+    i.addSingleton<IUserRepository>(
+      () => EnvironmentConfig.getUserRepository(),
+      config: BindConfig(),
+    );
     i.addLazySingleton<LandingPageStepProgess>(LandingPageStepProgess.new);
     i.addLazySingleton<UserProvider>(UserProvider.new);
   }
