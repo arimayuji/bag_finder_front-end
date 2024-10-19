@@ -4,6 +4,7 @@ import 'package:bag_finder_frontend/app/presentation/home/landing_page.dart';
 import 'package:bag_finder_frontend/app/presentation/landing/splash_page.dart';
 import 'package:bag_finder_frontend/app/presentation/landing/welcome_landing_page.dart';
 import 'package:bag_finder_frontend/app/presentation/user/controller/sign_in_controller.dart';
+import 'package:bag_finder_frontend/app/presentation/user/controller/sign_up_controller.dart';
 import 'package:bag_finder_frontend/app/presentation/user/login_landing_page.dart';
 import 'package:bag_finder_frontend/app/presentation/user/pages/landing/contact_us_page.dart';
 import 'package:bag_finder_frontend/app/presentation/user/pages/landing/find_your_account_page.dart';
@@ -13,13 +14,17 @@ import 'package:bag_finder_frontend/app/presentation/user/pages/sign_up_page.dar
 import 'package:bag_finder_frontend/app/shared/helpers/environments/environment_config.dart';
 import 'package:bag_finder_frontend/app/stores/user_provider.dart';
 import 'package:bag_finder_frontend/domain/repositories/user_repository.dart';
+import 'package:bag_finder_frontend/domain/usecases/add_user_usecase.dart';
 import 'package:bag_finder_frontend/domain/usecases/login_user_usecase.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:logger/logger.dart';
 
 class AppModule extends Module {
   @override
   void binds(i) {
     i.addSingleton<ILoginUserUsecase>(LoginUserUsecase.new);
+    i.addLazySingleton<IAddUserUsecase>(AddUserUsecase.new);
+    i.addLazySingleton<Logger>(Logger.new);
     i.addSingleton<IUserRepository>(
       () => EnvironmentConfig.getUserRepository(),
       config: BindConfig(),
@@ -60,12 +65,15 @@ class UserModule extends Module {
   @override
   void binds(i) {
     i.addLazySingleton<SignInController>(SignInController.new);
+    i.addLazySingleton<SignUpController>(SignUpController.new);
+    i.addLazySingleton<Logger>(Logger.new);
     i.addSingleton(UserProvider.new);
     i.addSingleton<IUserRepository>(
       () => EnvironmentConfig.getUserRepository(),
       config: BindConfig(),
     );
     i.addSingleton<ILoginUserUsecase>(LoginUserUsecase.new);
+    i.addLazySingleton<IAddUserUsecase>(AddUserUsecase.new);
   }
 
   @override
