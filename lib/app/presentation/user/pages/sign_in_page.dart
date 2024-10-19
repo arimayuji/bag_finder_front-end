@@ -18,16 +18,16 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  SignInController filterController = Modular.get<SignInController>();
+  SignInController signInController = Modular.get<SignInController>();
   UserProvider provider = Modular.get<UserProvider>();
 
   bool isLoginButtonEnabled() {
-    if (filterController.email == null || filterController.password == null) {
+    if (signInController.email == null || signInController.password == null) {
       return false;
     }
 
-    return filterController.email!.isNotEmpty &&
-        filterController.password!.isNotEmpty;
+    return signInController.email!.isNotEmpty &&
+        signInController.password!.isNotEmpty;
   }
 
   @override
@@ -57,7 +57,7 @@ class _SignInPageState extends State<SignInPage> {
             children: [
               LoginTextField(
                 onChanged: (String value) {
-                  filterController.setEmail(value);
+                  signInController.setEmail(value);
                   setState(() {});
                 },
                 prefixIcon: AppIconsSecondaryGrey.emailIcon,
@@ -71,7 +71,7 @@ class _SignInPageState extends State<SignInPage> {
               ),
               LoginTextField(
                 onChanged: (String value) {
-                  filterController.setPassword(value);
+                  signInController.setPassword(value);
                   setState(() {});
                 },
                 prefixIcon: AppIconsSecondaryGrey.passwordIcon,
@@ -89,10 +89,10 @@ class _SignInPageState extends State<SignInPage> {
               Row(
                 children: [
                   Checkbox(
-                    value: filterController.rememberMe,
+                    value: signInController.rememberMe,
                     onChanged: (value) {
                       setState(() {
-                        filterController.setRememberMe(value);
+                        signInController.setRememberMe(value);
                       });
                     },
                   ),
@@ -125,11 +125,10 @@ class _SignInPageState extends State<SignInPage> {
             child: ElevatedButton(
               onPressed: isLoginButtonEnabled()
                   ? () async {
-                      // Modular.to.navigate('/user/home');
-                      if (filterController.areFieldsValid()) {
+                      if (signInController.areFieldsValid()) {
                         UserEntity? user = await provider.loginUser(
-                          email: filterController.email!,
-                          password: filterController.password!,
+                          email: signInController.email!,
+                          password: signInController.password!,
                         );
 
                         user != null ? Modular.to.navigate('/user/home') : null;

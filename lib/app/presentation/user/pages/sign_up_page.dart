@@ -1,8 +1,11 @@
+import 'package:bag_finder_frontend/app/presentation/user/controller/sign_up_controller.dart';
+import 'package:bag_finder_frontend/app/presentation/user/mixins/user_validation_mixin.dart';
 import 'package:bag_finder_frontend/app/presentation/user/widgets/login_text_field.dart';
 import 'package:bag_finder_frontend/app/shared/themes/app_colors.dart';
 import 'package:bag_finder_frontend/app/shared/themes/app_dimensions.dart';
 import 'package:bag_finder_frontend/app/shared/themes/app_icons.dart';
 import 'package:bag_finder_frontend/app/shared/themes/app_text_styles.dart';
+import 'package:bag_finder_frontend/app/stores/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -14,7 +17,11 @@ class SignUpPage extends StatefulWidget {
   State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _SignUpPageState extends State<SignUpPage> with ValidationMixin {
+  SignUpController signUpController = Modular.get<SignUpController>();
+  UserProvider provider = Modular.get<UserProvider>();
+  bool isFormValid = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +54,11 @@ class _SignUpPageState extends State<SignUpPage> {
                   prefixIcon: AppIconsSecondaryGrey.personIcon,
                   hint: AppLocalizations.of(context)!.fullNamePlaceholder,
                   isPassword: false,
-                  fieldType: 'name',
+                  onChanged: (value) {
+                    signUpController.setFullName(value);
+                    setState(() {});
+                  },
+                  fieldType: 'fullName',
                   isRequired: true,
                 ),
                 const SizedBox(
@@ -58,6 +69,10 @@ class _SignUpPageState extends State<SignUpPage> {
                   hint: AppLocalizations.of(context)!.emailPlaceholder,
                   isPassword: false,
                   fieldType: 'email',
+                  onChanged: (value) {
+                    signUpController.setEmail(value);
+                    setState(() {});
+                  },
                   isRequired: true,
                 ),
                 const SizedBox(
@@ -67,7 +82,11 @@ class _SignUpPageState extends State<SignUpPage> {
                   prefixIcon: AppIconsSecondaryGrey.passwordIcon,
                   hint: AppLocalizations.of(context)!.passwordPlaceholder,
                   isPassword: true,
-                  fieldType: 'name',
+                  onChanged: (value) {
+                    signUpController.setPassword(value);
+                    setState(() {});
+                  },
+                  fieldType: 'password',
                   isRequired: true,
                 ),
               ],
@@ -75,7 +94,32 @@ class _SignUpPageState extends State<SignUpPage> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
+                style: ButtonStyle(
+                  backgroundColor: signUpController.areFieldsValid()
+                      ? WidgetStateProperty.all(
+                          AppColors.primary,
+                        )
+                      : WidgetStateProperty.all(
+                          AppColors.primary.withOpacity(
+                            0.5,
+                          ),
+                        ),
+                ),
+                onPressed: signUpController.areFieldsValid()
+                    ? () async {
+                        isFormValid = signUpController.areFieldsValid();
+
+                        if (isFormValid) {
+                          await provider.createUser(
+                            fullName: signUpController.fullName!,
+                            email: signUpController.email!,
+                            password: signUpController.password!,
+                          );
+
+                          Modular.to.navigate('/user/home');
+                        }
+                      }
+                    : null,
                 child: Text(
                   AppLocalizations.of(context)!.signUpPageButtonSignUp,
                   style: AppTextStyles.button,
@@ -96,7 +140,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 TextButton(
                   onPressed: () {
-                    Modular.to.navigate('/login/sign-in');
+                    Modular.to.navigate(
+                      '/login/sign-in',
+                    );
                   },
                   child: Text(
                     AppLocalizations.of(context)!.loginPageClickHere,
