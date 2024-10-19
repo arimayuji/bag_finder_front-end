@@ -7,9 +7,23 @@ class BagEntity {
   final String ownerId;
 
   BagEntity({
-    required this.description,
     required this.id,
+    required this.description,
     required this.status,
     required this.ownerId,
   });
+
+  BagEntity copyWith({
+    String? id,
+    String? description,
+    BagStatusEnum? status,
+    String? ownerId,
+  }) {
+    return BagEntity(
+      id: id ?? this.id,
+      description: description ?? this.description,
+      status: status ?? this.status,
+      ownerId: ownerId ?? this.ownerId,
+    );
+  }
 }

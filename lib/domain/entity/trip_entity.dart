@@ -8,4 +8,16 @@ class TripEntity {
     required this.description,
     required this.time,
   });
+
+  TripEntity copyWith({
+    String? id,
+    String? description,
+    DateTime? time,
+  }) {
+    return TripEntity(
+      id: id ?? this.id,
+      description: description ?? this.description,
+      time: time ?? this.time,
+    );
+  }
 }

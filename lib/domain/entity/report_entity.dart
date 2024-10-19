@@ -13,4 +13,19 @@ class ReportEntity {
     required this.userId,
     required this.bagEntity,
   });
+
+  // Método copyWith
+  ReportEntity copyWith({
+    String? id,
+    String? description,
+    UserEntity? userId,
+    BagEntity? bagEntity,
+  }) {
+    return ReportEntity(
+      id: id ?? this.id,
+      description: description ?? this.description,
+      userId: userId ?? this.userId,
+      bagEntity: bagEntity ?? this.bagEntity,
+    );
+  }
 }
