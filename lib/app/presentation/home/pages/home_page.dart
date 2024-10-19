@@ -13,6 +13,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var provider = Modular.get<UserProvider>();
+  
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -30,7 +31,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-          child: HomeAppBarWidget(userName: provider.user!.name,),
+          child: HomeAppBarWidget(userName: provider.user!.fullName,),
         ),
         const Padding(
           padding: EdgeInsets.only(

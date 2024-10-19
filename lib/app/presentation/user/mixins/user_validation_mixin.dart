@@ -37,6 +37,14 @@ mixin ValidationMixin {
     return null;
   }
 
+  String? validateFullName(String value) {
+    final names = value.trim().split(' ');
+    if (names.length < 2) {
+      return 'Por favor, insira seu nome completo (nome e sobrenome)';
+    }
+    return null;
+  }
+
   String? validateField(
       String? value, String fieldName, String fieldType, bool isRequired) {
     final requiredError = validateRequiredField(value, fieldName, isRequired);
@@ -52,6 +60,8 @@ mixin ValidationMixin {
           return validatePassword(value);
         case 'phone':
           return validateBrazilianPhone(value);
+        case 'fullname':
+          return validateFullName(value);
         default:
           return null;
       }

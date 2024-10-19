@@ -24,10 +24,10 @@ class HomeAppBarWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           HomeWelcomeUserWidget(userName: userName),
-          SizedBox(
+          const SizedBox(
             height: AppDimensions.verticalSpaceMedium,
           ),
-          HomeSearchBarWidget(),
+          const HomeSearchBarWidget(),
         ],
       ),
     );
