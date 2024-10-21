@@ -1,7 +1,7 @@
 import 'package:bag_finder_frontend/app/shared/themes/app_dimensions.dart';
 import 'package:bag_finder_frontend/app/shared/themes/app_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:bag_finder_frontend/app/shared/themes/app_colors.dart'; // Certifique-se de importar o AppColors corretamente
+import 'package:bag_finder_frontend/app/shared/themes/app_colors.dart';
 
 class HomeBottomNavigationBar extends StatefulWidget {
   final int selectedIndex;
@@ -27,6 +27,26 @@ class _HomeBottomNavigationBarState extends State<HomeBottomNavigationBar> {
     });
   }
 
+  // Método para mudar de rota
+  void _navigateTo(int index) {
+    widget.onItemTapped(index);
+
+    switch (index) {
+      case 0:
+        Navigator.pushNamed(context, '/user/home');
+        break;
+      case 1:
+        Navigator.pushNamed(context, '/user/luggage');
+        break;
+      case 2:
+        Navigator.pushNamed(context, '/user/history');
+        break;
+      case 3:
+        Navigator.pushNamed(context, '/user/profile');
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -48,30 +68,46 @@ class _HomeBottomNavigationBarState extends State<HomeBottomNavigationBar> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           mainAxisSize: MainAxisSize.max,
           children: [
+            // Ícone de Home
             IconButton(
               padding: EdgeInsets.zero,
               icon: AppIconsSecondary.homeIcon,
               iconSize: AppDimensions.iconExtraLarge,
-              onPressed: () => widget.onItemTapped(0),
+              color: widget.selectedIndex == 0
+                  ? AppColors.primary
+                  : AppColors.secondaryGrey,
+              onPressed: () => _navigateTo(0),
             ),
+            // Ícone de Bag
             IconButton(
               padding: EdgeInsets.zero,
-              onPressed: () => widget.onItemTapped(1),
               icon: AppIconsSecondary.luggageIcon,
               iconSize: AppDimensions.iconExtraLarge,
+              color: widget.selectedIndex == 1
+                  ? AppColors.primary
+                  : AppColors.secondaryGrey,
+              onPressed: () => _navigateTo(1),
             ),
+            // Ícone de Histórico
             IconButton(
               padding: EdgeInsets.zero,
               icon: AppIconsSecondary.historyIcon,
               iconSize: AppDimensions.iconExtraLarge,
-              onPressed: () => widget.onItemTapped(1),
+              color: widget.selectedIndex == 2
+                  ? AppColors.primary
+                  : AppColors.secondaryGrey,
+              onPressed: () => _navigateTo(2),
             ),
+            // Ícone de Perfil
             IconButton(
               padding: EdgeInsets.zero,
               icon: AppIconsSecondary.personIcon,
               iconSize: AppDimensions.iconExtraLarge,
-              onPressed: () => widget.onItemTapped(2),
-            )
+              color: widget.selectedIndex == 3
+                  ? AppColors.primary
+                  : AppColors.secondaryGrey,
+              onPressed: () => _navigateTo(3),
+            ),
           ],
         ),
       ),

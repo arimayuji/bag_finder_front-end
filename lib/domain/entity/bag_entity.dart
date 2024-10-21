@@ -26,4 +26,13 @@ class BagEntity {
       ownerId: ownerId ?? this.ownerId,
     );
   }
+
+  static BagEntity empty() {
+    return BagEntity(
+      id: '',
+      description: '',
+      status: BagStatusEnum.UNKNOWN,
+      ownerId: '',
+    );
+  }
 }

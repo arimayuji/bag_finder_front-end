@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({
+    super.key,
+  });
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -13,7 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var provider = Modular.get<UserProvider>();
-  
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,7 +33,9 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-          child: HomeAppBarWidget(userName: provider.user!.fullName,),
+          child: HomeAppBarWidget(
+            userName: provider.user!.fullName,
+          ),
         ),
         const Padding(
           padding: EdgeInsets.only(

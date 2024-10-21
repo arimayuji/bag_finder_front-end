@@ -20,4 +20,12 @@ class TripEntity {
       time: time ?? this.time,
     );
   }
+
+  static TripEntity empty() {
+    return TripEntity(
+      id: '',
+      description: '',
+      time: DateTime.now(),
+    );
+  }
 }

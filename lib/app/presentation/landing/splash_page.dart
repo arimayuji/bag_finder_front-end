@@ -39,7 +39,9 @@ class _SplashPageState extends State<SplashPage> {
               ),
           child: AnimatedTextKit(
             animatedTexts: [
-              WavyAnimatedText("Bag Finder"),
+              WavyAnimatedText(
+                "Bag Finder",
+              ),
             ],
           ),
         ),

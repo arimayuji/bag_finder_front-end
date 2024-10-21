@@ -1,5 +1,7 @@
 import 'package:bag_finder_frontend/domain/entity/trip_entity.dart';
+import 'package:bag_finder_frontend/domain/entity/user_avatar_entity.dart';
 import 'package:bag_finder_frontend/domain/entity/user_entity.dart';
+import 'package:bag_finder_frontend/domain/enums/user_gender_enum.dart';
 import 'package:bag_finder_frontend/domain/failures/failure.dart';
 import 'package:bag_finder_frontend/domain/repositories/user_repository.dart';
 import 'package:collection/collection.dart';
@@ -13,7 +15,9 @@ class UserRepositoryMock implements IUserRepository {
       email: 'bagfinder@gmail.com',
       password: 'password!',
       fullName: 'Admin',
-      photoUrl: '',
+      avatar: UserAvatarEntity.empty(),
+      updatedAt: null,
+      gender: UserGenderEnum.OTHER,
     ),
     UserEntity(
       phone: '(11) 99999-9999',
@@ -21,7 +25,9 @@ class UserRepositoryMock implements IUserRepository {
       email: 'bagfinder@gmail.com',
       password: 'password!',
       fullName: 'Fake Admin',
-      photoUrl: '',
+      avatar: UserAvatarEntity.empty(),
+      updatedAt: null,
+      gender: UserGenderEnum.OTHER,
     ),
   ];
 
@@ -34,7 +40,7 @@ class UserRepositoryMock implements IUserRepository {
       ),
     );
 
-    UserEntity? isRegistered = _users.firstWhereOrNull(
+    UserEntity? userAlreadyRegistered = _users.firstWhereOrNull(
       (
         u,
       ) {
@@ -42,7 +48,7 @@ class UserRepositoryMock implements IUserRepository {
       },
     );
 
-    if (isRegistered == null) {
+    if (userAlreadyRegistered == null) {
       _users.add(
         user,
       );
@@ -208,14 +214,14 @@ class UserRepositoryMock implements IUserRepository {
       ),
     );
 
-    UserEntity? user = _users.firstWhere(
+    UserEntity? userAlreadyExist = _users.firstWhereOrNull(
       (
         user,
       ) =>
           user.id == id,
     );
 
-    if (user is StateError) {
+    if (userAlreadyExist == null) {
       return Left(
         UserNotFound(
           errorMessage: 'User not found',
@@ -225,7 +231,7 @@ class UserRepositoryMock implements IUserRepository {
     }
 
     return Right(
-      user,
+      userAlreadyExist,
     );
   }
 

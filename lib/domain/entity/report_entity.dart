@@ -28,4 +28,13 @@ class ReportEntity {
       bagEntity: bagEntity ?? this.bagEntity,
     );
   }
+
+  static ReportEntity empty() {
+    return ReportEntity(
+      id: '',
+      description: '',
+      userId: UserEntity.empty(), 
+      bagEntity: BagEntity.empty(), 
+    );
+  }
 }

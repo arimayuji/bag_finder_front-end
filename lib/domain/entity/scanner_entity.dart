@@ -16,4 +16,11 @@ class ScannerEntity {
       isActive: isActive ?? this.isActive,
     );
   }
+
+  static ScannerEntity empty() {
+    return ScannerEntity(
+      id: '',
+      isActive: 'false', 
+    );
+  }
 }

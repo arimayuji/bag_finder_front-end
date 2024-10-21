@@ -3,6 +3,7 @@ import 'package:bag_finder_frontend/app/presentation/landing/controller/landing_
 import 'package:bag_finder_frontend/app/presentation/home/landing_page.dart';
 import 'package:bag_finder_frontend/app/presentation/landing/splash_page.dart';
 import 'package:bag_finder_frontend/app/presentation/landing/welcome_landing_page.dart';
+import 'package:bag_finder_frontend/app/presentation/profile/pages/profile_page.dart';
 import 'package:bag_finder_frontend/app/presentation/user/controller/sign_in_controller.dart';
 import 'package:bag_finder_frontend/app/presentation/user/controller/sign_up_controller.dart';
 import 'package:bag_finder_frontend/app/presentation/user/login_landing_page.dart';
@@ -15,6 +16,7 @@ import 'package:bag_finder_frontend/app/shared/helpers/environments/environment_
 import 'package:bag_finder_frontend/app/stores/user_provider.dart';
 import 'package:bag_finder_frontend/domain/repositories/user_repository.dart';
 import 'package:bag_finder_frontend/domain/usecases/add_user_usecase.dart';
+import 'package:bag_finder_frontend/domain/usecases/get_user_usecase.dart';
 import 'package:bag_finder_frontend/domain/usecases/login_user_usecase.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:logger/logger.dart';
@@ -24,6 +26,7 @@ class AppModule extends Module {
   void binds(i) {
     i.addSingleton<ILoginUserUsecase>(LoginUserUsecase.new);
     i.addLazySingleton<IAddUserUsecase>(AddUserUsecase.new);
+    i.addLazySingleton<IGetUserUsecase>(GetUserUsecase.new);
     i.addLazySingleton<Logger>(Logger.new);
     i.addSingleton<IUserRepository>(
       () => EnvironmentConfig.getUserRepository(),
@@ -74,6 +77,7 @@ class UserModule extends Module {
     );
     i.addSingleton<ILoginUserUsecase>(LoginUserUsecase.new);
     i.addLazySingleton<IAddUserUsecase>(AddUserUsecase.new);
+    i.addLazySingleton<IGetUserUsecase>(GetUserUsecase.new);
   }
 
   @override
@@ -84,12 +88,16 @@ class UserModule extends Module {
       children: [
         ChildRoute(
           '/sign-in',
-          child: (context) => const SignInPage(),
+          child: (context) {
+            return const SignInPage();
+          },
           transition: TransitionType.rightToLeft,
         ),
         ChildRoute(
           '/sign-up',
-          child: (context) => const SignUpPage(),
+          child: (context) {
+            return const SignUpPage();
+          },
           transition: TransitionType.rightToLeft,
         ),
         ChildRoute(
@@ -98,7 +106,7 @@ class UserModule extends Module {
           transition: TransitionType.rightToLeft,
         ),
         ChildRoute(
-          '/fogot-password',
+          '/forgot-password',
           child: (context) => const ForgotPasswordPage(),
           transition: TransitionType.rightToLeft,
         ),
@@ -106,7 +114,7 @@ class UserModule extends Module {
           '/find-your-account',
           child: (context) => const FindYourAccountPage(),
           transition: TransitionType.rightToLeft,
-        )
+        ),
       ],
     );
   }
@@ -124,7 +132,16 @@ class HomeModule extends Module {
       children: [
         ChildRoute(
           '/home',
-          child: (context) => const HomePage(),
+          child: (context) {
+            return const HomePage();
+          },
+          transition: TransitionType.leftToRight,
+        ),
+        ChildRoute(
+          '/profile',
+          child: (context) {
+            return const ProfilePage();
+          },
           transition: TransitionType.leftToRight,
         ),
       ],

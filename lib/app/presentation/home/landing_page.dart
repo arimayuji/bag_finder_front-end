@@ -36,7 +36,7 @@ class _LandingPageState extends State<LandingPage> {
       child: Scaffold(
         bottomNavigationBar: HomeBottomNavigationBar(
           selectedIndex: _selectedIndex,
-          onItemTapped: _onItemTapped, // Define a função de mudança de aba
+          onItemTapped: _onItemTapped, 
         ),
         body: SafeArea(
           left: false,
@@ -46,7 +46,7 @@ class _LandingPageState extends State<LandingPage> {
             child: SizedBox(
               height: screenHeight,
               child:
-                  const RouterOutlet(), // O conteúdo principal será mostrado aqui
+                  const RouterOutlet(), 
             ),
           ),
         ),
