@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class UserAvatarEntity {
   final Color color;
@@ -21,8 +21,10 @@ class UserAvatarEntity {
 
   static UserAvatarEntity empty() {
     return UserAvatarEntity(
-      color: const Color(0x00000000), 
-      icon: CupertinoIcons.person, 
+      color: const Color(
+        0x00000000,
+      ),
+      icon: Icons.person,
     );
   }
 }

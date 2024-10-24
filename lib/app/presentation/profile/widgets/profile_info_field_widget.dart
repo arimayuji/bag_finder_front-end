@@ -23,7 +23,9 @@ class InfoField extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
         ),
-        const SizedBox(height: 4),
+        const SizedBox(
+          height: 4,
+        ),
         Text(
           content,
           style: Theme.of(context).textTheme.bodyLarge!.copyWith(
@@ -31,8 +33,11 @@ class InfoField extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(
+          height: 8,
+        ),
         Divider(
+          indent: 0,
           color: AppColors.secondaryGrey,
           thickness: 1,
         ),
