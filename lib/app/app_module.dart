@@ -3,6 +3,7 @@ import 'package:bag_finder_frontend/app/presentation/landing/controller/landing_
 import 'package:bag_finder_frontend/app/presentation/home/landing_page.dart';
 import 'package:bag_finder_frontend/app/presentation/landing/splash_page.dart';
 import 'package:bag_finder_frontend/app/presentation/landing/welcome_landing_page.dart';
+import 'package:bag_finder_frontend/app/presentation/profile/pages/edit_profile_page.dart';
 import 'package:bag_finder_frontend/app/presentation/profile/pages/profile_page.dart';
 import 'package:bag_finder_frontend/app/presentation/user/controller/sign_in_controller.dart';
 import 'package:bag_finder_frontend/app/presentation/user/controller/sign_up_controller.dart';
@@ -69,15 +70,10 @@ class UserModule extends Module {
   void binds(i) {
     i.addLazySingleton<SignInController>(SignInController.new);
     i.addLazySingleton<SignUpController>(SignUpController.new);
-    i.addLazySingleton<Logger>(Logger.new);
-    i.addSingleton(UserProvider.new);
     i.addSingleton<IUserRepository>(
       () => EnvironmentConfig.getUserRepository(),
       config: BindConfig(),
     );
-    i.addSingleton<ILoginUserUsecase>(LoginUserUsecase.new);
-    i.addLazySingleton<IAddUserUsecase>(AddUserUsecase.new);
-    i.addLazySingleton<IGetUserUsecase>(GetUserUsecase.new);
   }
 
   @override
@@ -144,6 +140,13 @@ class HomeModule extends Module {
           },
           transition: TransitionType.leftToRight,
         ),
+        ChildRoute(
+          '/profile/edit',
+          child: (context) {
+            return const EditProfilePage();
+          },
+          transition: TransitionType.leftToRight,
+        )
       ],
     );
   }
