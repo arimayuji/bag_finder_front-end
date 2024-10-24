@@ -14,7 +14,7 @@ class ProgressIndicatorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SmoothPageIndicator(
       controller: controller.pageController,
-      count: 3, // Ajuste conforme o número de páginas
+      count: 3, 
       effect: WormEffect(
         activeDotColor: AppColors.primary,
         dotHeight: 8,

@@ -27,7 +27,6 @@ class _HomeBottomNavigationBarState extends State<HomeBottomNavigationBar> {
     });
   }
 
-  // Método para mudar de rota
   void _navigateTo(int index) {
     widget.onItemTapped(index);
 
@@ -68,7 +67,6 @@ class _HomeBottomNavigationBarState extends State<HomeBottomNavigationBar> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           mainAxisSize: MainAxisSize.max,
           children: [
-            // Ícone de Home
             IconButton(
               padding: EdgeInsets.zero,
               icon: AppIconsSecondary.homeIcon,
@@ -78,7 +76,6 @@ class _HomeBottomNavigationBarState extends State<HomeBottomNavigationBar> {
                   : AppColors.secondaryGrey,
               onPressed: () => _navigateTo(0),
             ),
-            // Ícone de Bag
             IconButton(
               padding: EdgeInsets.zero,
               icon: AppIconsSecondary.luggageIcon,
@@ -88,7 +85,6 @@ class _HomeBottomNavigationBarState extends State<HomeBottomNavigationBar> {
                   : AppColors.secondaryGrey,
               onPressed: () => _navigateTo(1),
             ),
-            // Ícone de Histórico
             IconButton(
               padding: EdgeInsets.zero,
               icon: AppIconsSecondary.historyIcon,
@@ -98,7 +94,6 @@ class _HomeBottomNavigationBarState extends State<HomeBottomNavigationBar> {
                   : AppColors.secondaryGrey,
               onPressed: () => _navigateTo(2),
             ),
-            // Ícone de Perfil
             IconButton(
               padding: EdgeInsets.zero,
               icon: AppIconsSecondary.personIcon,

@@ -97,7 +97,7 @@ class _LoginTextFieldState extends State<LoginTextField> with ValidationMixin {
             color: AppColors.secondaryGrey,
           ),
         ),
-        if (errorMessage != null) // Exibe a mensagem de erro se houver
+        if (errorMessage != null) 
           Padding(
             padding: const EdgeInsets.only(top: 4.0),
             child: Text(

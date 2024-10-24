@@ -5,9 +5,8 @@ import 'package:bag_finder_frontend/domain/repositories/user_repository.dart';
 import 'package:bag_finder_frontend/env/env_enum.dart';
 
 class EnvironmentConfig {
-  // ignore: constant_identifier_names
   static const MSS_BASE_URL = String.fromEnvironment('MSS_BASE_URL');
-  // ignore: constant_identifier_names
+
   static const ENV = String.fromEnvironment('ENV');
 
   static IBagRepository getBagRepository() {
@@ -24,7 +23,6 @@ class EnvironmentConfig {
     }
   }
 
-
   static IUserRepository getUserRepository() {
     EnvironmentEnum value = EnvironmentEnum.values.firstWhere(
       (element) {
@@ -38,5 +36,4 @@ class EnvironmentConfig {
       return UserRepositoryMock();
     }
   }
- 
 }

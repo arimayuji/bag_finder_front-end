@@ -22,11 +22,11 @@ class CustomTextFormField extends StatelessWidget {
           vertical: 12,
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4), // Bordas arredondadas
-          borderSide: BorderSide.none, // Sem borda
+          borderRadius: BorderRadius.circular(4), 
+          borderSide: BorderSide.none, 
         ),
         hintStyle: const TextStyle(
-          color: Colors.black87, // Cor do texto
+          color: Colors.black87, 
           fontSize: 16,
         ),
         prefixIconConstraints: const BoxConstraints(

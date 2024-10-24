@@ -14,7 +14,6 @@ class ReportEntity {
     required this.bagEntity,
   });
 
-  // Método copyWith
   ReportEntity copyWith({
     String? id,
     String? description,

@@ -1,6 +1,6 @@
 import 'package:bag_finder_frontend/app/shared/screen_helper.dart';
 import 'package:bag_finder_frontend/app/stores/user_provider.dart';
-import 'package:bag_finder_frontend/app/shared/widgets/home_bottom_navigation_bar.dart'; // Certifique-se de importar o widget de BottomNavigationBar
+import 'package:bag_finder_frontend/app/shared/widgets/home_bottom_navigation_bar.dart'; 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:provider/provider.dart';

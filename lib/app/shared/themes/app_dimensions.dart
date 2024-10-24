@@ -1,4 +1,3 @@
-// dimensions.dart
 class AppDimensions {
   // padding
   static const double paddingSmall = 8.0;

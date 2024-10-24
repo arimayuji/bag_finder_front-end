@@ -28,7 +28,7 @@ class _LoginLandingPageState extends State<LoginLandingPage> {
             bottom: AppDimensions.paddingMedium,
           ),
           child: SizedBox(
-            height: screenHeight, // Ajusta o tamanho para evitar overflow
+            height: screenHeight, 
             child: const RouterOutlet(),
           ),
         ),
